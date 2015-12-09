@@ -5,10 +5,21 @@ class Demo
 {
     protected $armies = [];
 
+    public static function GenerateName()
+    {
+        static $adjectives  = ['Lumbering', 'Berserk', 'Cheerful', 'Pillaging', 'Simpleminded'];
+        static $nouns       = ['Sloths', 'Slugbears', 'Watchmakers', 'Barbarians', 'Adventurers'];
+
+        shuffle($adjectives);
+        shuffle($nouns);
+
+        return array_pop($adjectives) . ' ' . array_pop($nouns);
+    }
+
     public function __construct()
     {
-        $this->armies[] = new Army('Ravens of Doom',    rand(1000, 10000));
-        $this->armies[] = new Army('Lumbering Sloths',  rand(1000, 10000));
+        $this->armies[] = new Army(self::GenerateName(), rand(1000, 10000));
+        $this->armies[] = new Army(self::GenerateName(), rand(1000, 10000));
 
         return;
     }
