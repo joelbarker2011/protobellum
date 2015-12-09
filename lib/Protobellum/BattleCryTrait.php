@@ -7,7 +7,7 @@ trait BattleCryTrait
 
     private static $VictoryCry      = 'Victory to the mighty!';
     private static $DirgeOfDefeat   = 'Alas! The battle is lost!';
-    private static $Surrender       = '<br/>We surrender!';
+    private static $Surrender       = 'We surrender!';
 
     protected function rejoice()
     {
