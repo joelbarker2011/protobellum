@@ -23,7 +23,6 @@ class Demo
             $attacker   = $this->getNextArmy();
             $victim     = $this->getNextArmy($attacker);
             
-            echo "<i>The $attacker->name have attacked the $victim->name!</i><br/>";
             $attacker->attack($victim);
 
             $attacker->muster();

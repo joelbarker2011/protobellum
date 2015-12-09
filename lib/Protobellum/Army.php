@@ -11,10 +11,11 @@ class Army
 
     /* public methods */
 
-    public function __construct($name, $troops)
+    public function __construct($name, $troops, Herald $herald = null)
     {
         $this->name     = $name;
         $this->troops   = $troops;
+        $this->herald   = $herald ? $herald : new Herald($this);
     }
 
     public function __get($private_var)
@@ -32,18 +33,14 @@ class Army
 
     public function muster()
     {
-        echo "<h6>$this->name</h6>";
-        echo "$this->troops<br/>";
+        $this->herald->announce();
         return;
-        echo json_encode([
-            'name'          => $this->name,
-            'troops'        => $this->troops,
-            'surrendered'   => $this->surrendered,
-        ]);
     }
 
     public function attack(Army $enemy)
     {
+        $this->herald->announce("Attack the vile $enemy->name!");
+
         $victory = $this->strength() > $enemy->strength();
 
         $this->sustainDamage($victory);
