@@ -1,0 +1,19 @@
+#scoreboard {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+}
+
+#scoreboard div {
+  font-size: 36px;
+  margin-bottom: 10px;
+}
+
+#scoreboard div::before {
+  content: attr(data-name);
+  font-size: 18px;
+  font-variant: all-small-caps;
+  margin-right: 10px;
+  color: gray;
+  vertical-align: middle;
+}
