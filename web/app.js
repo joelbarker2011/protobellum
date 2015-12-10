@@ -49,5 +49,8 @@ $(function() {
 
   // start a war!
   war = setInterval(listenToChatter, 3000);
+  
+  // rush into battle!
+  listenToChatter();
 });
 
