@@ -1,11 +1,19 @@
 <?php
 namespace Protobellum;
 
+/**
+ * Encapsulate logic to wage a demonstrative war
+ */
 class Demo
 {
     protected $armies = [];
 
-    public static function GenerateName()
+    /**
+     * Randomly generate a beautiful name for our army
+     *
+     * @return  string  The beautiful name
+     */
+    private static function GenerateName()
     {
         static $adjectives  = ['Lumbering', 'Berserk', 'Cheerful', 'Pillaging', 'Simpleminded'];
         static $nouns       = ['Sloths', 'Slugbears', 'Watchmakers', 'Barbarians', 'Adventurers'];
@@ -16,6 +24,11 @@ class Demo
         return array_pop($adjectives) . ' ' . array_pop($nouns);
     }
 
+    /**
+     * Prepare a war. Please exercise discretion.
+     *
+     * @return  void
+     */
     public function __construct()
     {
         $this->armies[] = new Army(self::GenerateName(), rand(1000, 10000));
@@ -24,6 +37,11 @@ class Demo
         return;
     }
 
+    /**
+     * Start a war, consisting of a series of battles
+     *
+     * @return void
+     */
     public function wageWar()
     {
         while (count($this->armies) > 1) {
@@ -33,6 +51,11 @@ class Demo
         return;
     }
 
+    /**
+     * Engage in a single battle (one attack and some damage)
+     *
+     * @return  void
+     */
     public function doBattle()
     {
         if (! $this->runSanityChecks()) {
@@ -54,11 +77,21 @@ class Demo
         return;
     }
 
+    /**
+     * Check whether the war is over
+     *
+     * @return  bool    True if the war is over, else false
+     */
     public function isOver()
     {
-        count($this->armies) < 2;
+        return count($this->armies) < 2;
     }
 
+    /**
+     * Make sure that there are at least 2 opposing armies, and other checks
+     *
+     * @return  bool    True if we're ready for war, false if there were problems
+     */
     protected function runSanityChecks()
     {
         // make sure there are no duplicate armies
@@ -74,6 +107,13 @@ class Demo
         return true;
     }
 
+    /**
+     * Pick a random army from those at war
+     *
+     * @param   Army    $excluded   (optional) Don't pick this army for some reason
+     *
+     * @return  Army    A random army that isn't $excluded
+     */
     protected function getNextArmy(Army $excluded = null)
     {
         $candidate = null;

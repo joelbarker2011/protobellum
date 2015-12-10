@@ -1,12 +1,22 @@
 <?php
 namespace Protobellum;
 
+/**
+ * Collect all battle messages and convert them to JSON
+ */
 class Herald
 {
     private static $Output = [];
     private $army;
     private $color;
 
+    /**
+     * Constructor
+     *
+     * @param   Army    $army   An army for this Herald to join
+     *
+     * @return  void
+     */
     public function __construct(Army $army)
     {
         $this->army     = $army;
@@ -17,6 +27,15 @@ class Herald
         return;
     }
 
+    /**
+     * Prepare a message for later transmission
+     *
+     * @param   string  $message    (Optional) A message to transmit
+     *
+     * @return  void
+     *
+     * If $message is omitted, other army stats will still be prepared for transmission.
+     */
     public function announce($message = null)
     {
         self::$Output[] = [
@@ -30,6 +49,11 @@ class Herald
         return;
     }
 
+    /**
+     * Emit all pending message (by echoing)
+     *
+     * @return void
+     */
     public function flush()
     {
         if (! empty(self::$Output)) {
@@ -40,6 +64,9 @@ class Herald
         return;
     }
 
+    /**
+     * Flush all message before the object is destroyed
+     */
     public function __destruct()
     {
         $this->flush();
